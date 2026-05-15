@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>BIO4 — Documentación Choferes y Unidades</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-logo">
+      <img src="img/logo-white.png" alt="BIO4" class="logo-img">
+      <span class="logo-sub">Control Ingreso Camiones</span>
+    </div>
+    <div class="header-badge">Formulario de Documentación</div>
+  </div>
+</header>
+
+<main>
+  <form id="mainForm" novalidate>
+
+    <!-- ── Paso 1: modo ──────────────────────────────────────────── -->
+    <section class="card" id="cardModo">
+      <h2>¿Qué tipo de carga es?</h2>
+      <p class="hint">Seleccioná si es la primera vez que el chofer o unidad visita la planta, o si querés actualizar documentación existente.</p>
+      <div class="modo-grid">
+        <label class="modo-btn">
+          <input type="radio" name="modo" value="alta">
+          <div class="modo-inner modo-alta">
+            <span class="modo-icon">📝</span>
+            <span class="modo-title">Alta Documentación</span>
+            <span class="modo-desc">Primera vez en planta. Todos los documentos son obligatorios.</span>
+          </div>
+        </label>
+        <label class="modo-btn">
+          <input type="radio" name="modo" value="actualizar">
+          <div class="modo-inner modo-act">
+            <span class="modo-icon">🔄</span>
+            <span class="modo-title">Actualizar Documentación</span>
+            <span class="modo-desc">Ya tiene registro. Completá solo lo que cambió o venció.</span>
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <!-- ── Paso 2: tipo ──────────────────────────────────────────── -->
+    <section class="card hidden" id="cardTipo">
+      <div id="modoIndicator" class="modo-indicator"></div>
+      <h2>¿Qué desea actualizar?</h2>
+      <p class="hint">Podés completar datos de chofer, de la unidad, o ambos en el mismo envío.</p>
+      <div class="tipo-grid">
+        <label class="tipo-btn">
+          <input type="radio" name="tipo" value="chofer">
+          <span>
+            <span class="tipo-icon">👤</span>
+            <span class="tipo-label">Datos de Chofer</span>
+          </span>
+        </label>
+        <label class="tipo-btn">
+          <input type="radio" name="tipo" value="unidad">
+          <span>
+            <span class="tipo-icon">🚛</span>
+            <span class="tipo-label">Datos de Unidad</span>
+          </span>
+        </label>
+        <label class="tipo-btn">
+          <input type="radio" name="tipo" value="ambos">
+          <span>
+            <span class="tipo-icon">📋</span>
+            <span class="tipo-label">Ambos</span>
+          </span>
+        </label>
+      </div>
+    </section>
+
+    <!-- ── Sección Chofer ────────────────────────────────────────── -->
+    <section class="card hidden" id="sectionChofer">
+      <h2>👤 Datos del Chofer</h2>
+      <p class="hint">El DNI se usa para actualizar un registro existente o crear uno nuevo.</p>
+
+      <div class="field required-field">
+        <label for="f_dni">DNI / CUIT <span class="req">*</span></label>
+        <input id="f_dni" type="text" name="dni" inputmode="numeric"
+               placeholder="Sin puntos ni guiones" required>
+      </div>
+
+      <div class="field">
+        <label>Apellido y Nombre <span class="req-alta">*</span></label>
+        <input type="text" name="nombre" placeholder="Ej: García Juan"
+               data-alta="chofer">
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Empresa Transporte <span class="req-alta">*</span></label>
+          <input type="text" name="empresa" data-alta="chofer">
+        </div>
+        <div class="field">
+          <label>Petrolera <span class="req-alta">*</span></label>
+          <input type="text" name="petrolera" data-alta="chofer">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Patente Chasis asignada <span class="req-alta">*</span></label>
+          <input type="text" name="patente_ch_asig" class="uppercase"
+                 placeholder="Ej: ABC123" data-alta="chofer">
+        </div>
+        <div class="field">
+          <label>Patente Cisterna/Semi asignada</label>
+          <input type="text" name="patente_cis_asig" class="uppercase"
+                 placeholder="Ej: XYZ789">
+        </div>
+      </div>
+
+      <div class="section-divider">
+        <span>Documentación</span>
+      </div>
+
+      <div class="doc-field">
+        <div class="doc-header">
+          <span class="doc-title">Carnet de Conducir</span>
+        </div>
+        <label class="sub-label">Fecha de vencimiento <span class="req-alta">*</span></label>
+        <input type="date" name="venc_carnet" data-alta="chofer">
+        <label class="foto-label" for="f_img_carnet">
+          <span class="camara-icon">📷</span>
+          <span class="foto-text">Adjuntar foto del carnet <span class="req-alta">*</span></span>
+          <span class="foto-filename" id="fn_carnet"></span>
+        </label>
+        <input id="f_img_carnet" type="file" name="img_carnet" class="foto-input"
+               accept="image/jpeg,image/png,image/heic,image/heif,image/webp"
+               capture="environment" data-alta="chofer">
+        <div class="foto-preview" id="prev_carnet"></div>
+      </div>
+
+      <div class="doc-field">
+        <div class="doc-header">
+          <span class="doc-title">Psicofísico</span>
+        </div>
+        <label class="sub-label">Fecha de vencimiento <span class="req-alta">*</span></label>
+        <input type="date" name="venc_psico" data-alta="chofer">
+        <label class="foto-label" for="f_img_psico">
+          <span class="camara-icon">📷</span>
+          <span class="foto-text">Adjuntar foto del psicofísico <span class="req-alta">*</span></span>
+          <span class="foto-filename" id="fn_psico"></span>
+        </label>
+        <input id="f_img_psico" type="file" name="img_psico" class="foto-input"
+               accept="image/jpeg,image/png,image/heic,image/heif,image/webp"
+               capture="environment" data-alta="chofer">
+        <div class="foto-preview" id="prev_psico"></div>
+      </div>
+
+      <div class="doc-field">
+        <div class="doc-header">
+          <span class="doc-title">Cargas Peligrosas</span>
+        </div>
+        <label class="sub-label">Fecha de vencimiento <span class="req-alta">*</span></label>
+        <input type="date" name="venc_cargas" data-alta="chofer">
+        <label class="foto-label" for="f_img_cargas">
+          <span class="camara-icon">📷</span>
+          <span class="foto-text">Adjuntar foto de cargas peligrosas <span class="req-alta">*</span></span>
+          <span class="foto-filename" id="fn_cargas"></span>
+        </label>
+        <input id="f_img_cargas" type="file" name="img_cargas" class="foto-input"
+               accept="image/jpeg,image/png,image/heic,image/heif,image/webp"
+               capture="environment" data-alta="chofer">
+        <div class="foto-preview" id="prev_cargas"></div>
+      </div>
+
+      <div class="field">
+        <label>Observaciones</label>
+        <textarea name="obs_chofer" rows="3" placeholder="Observaciones adicionales..."></textarea>
+      </div>
+    </section>
+
+    <!-- ── Sección Unidad ────────────────────────────────────────── -->
+    <section class="card hidden" id="sectionUnidad">
+      <h2>🚛 Datos de la Unidad</h2>
+      <p class="hint">La Patente Chasis se usa para identificar y actualizar la unidad.</p>
+
+      <div class="field required-field">
+        <label for="f_patente_ch">Patente Chasis <span class="req">*</span></label>
+        <input id="f_patente_ch" type="text" name="patente_ch"
+               class="uppercase" placeholder="Ej: ABC123" required>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Patente Cisterna / Semi</label>
+          <input type="text" name="patente_cis" class="uppercase" placeholder="Ej: XYZ789">
+        </div>
+        <div class="field">
+          <label>Código INV</label>
+          <input type="text" name="cod_inv" placeholder="Ej: INV-0042">
+        </div>
+      </div>
+
+      <div class="section-divider">
+        <span>Documentación</span>
+      </div>
+
+      <div class="doc-field">
+        <div class="doc-header">
+          <span class="doc-title">ITV Chasis</span>
+        </div>
+        <label class="sub-label">Fecha de vencimiento <span class="req-alta">*</span></label>
+        <input type="date" name="venc_itv_chas" data-alta="unidad">
+        <label class="foto-label" for="f_img_itv_chas">
+          <span class="camara-icon">📷</span>
+          <span class="foto-text">Adjuntar foto ITV Chasis <span class="req-alta">*</span></span>
+          <span class="foto-filename" id="fn_itv_chas"></span>
+        </label>
+        <input id="f_img_itv_chas" type="file" name="img_itv_chas" class="foto-input"
+               accept="image/jpeg,image/png,image/heic,image/heif,image/webp"
+               capture="environment" data-alta="unidad">
+        <div class="foto-preview" id="prev_itv_chas"></div>
+      </div>
+
+      <div class="doc-field">
+        <div class="doc-header">
+          <span class="doc-title">ITV Cisterna / Semi</span>
+        </div>
+        <label class="sub-label">Fecha de vencimiento <span class="req-alta">*</span></label>
+        <input type="date" name="venc_itv_cis" data-alta="unidad">
+        <label class="foto-label" for="f_img_itv_cis">
+          <span class="camara-icon">📷</span>
+          <span class="foto-text">Adjuntar foto ITV Cisterna <span class="req-alta">*</span></span>
+          <span class="foto-filename" id="fn_itv_cis"></span>
+        </label>
+        <input id="f_img_itv_cis" type="file" name="img_itv_cis" class="foto-input"
+               accept="image/jpeg,image/png,image/heic,image/heif,image/webp"
+               capture="environment" data-alta="unidad">
+        <div class="foto-preview" id="prev_itv_cis"></div>
+      </div>
+
+      <div class="field">
+        <label>Observaciones</label>
+        <textarea name="obs_unidad" rows="3" placeholder="Observaciones adicionales..."></textarea>
+      </div>
+    </section>
+
+    <!-- ── Submit ────────────────────────────────────────────────── -->
+    <div class="submit-area hidden" id="submitArea">
+      <button type="submit" id="btnSubmit">Enviar Formulario</button>
+      <div id="resultMsg" class="hidden" role="alert"></div>
+    </div>
+
+  </form>
+</main>
+
+<footer>
+  <p>BIO4 — Control Ingreso Camiones &nbsp;|&nbsp; Solo personal autorizado</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

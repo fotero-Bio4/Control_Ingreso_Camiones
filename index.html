@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>BIO4 — Documentación Choferes y Unidades</title>
   <link rel="stylesheet" href="style.css">
+  <!-- Cloudflare Turnstile — reemplazar data-sitekey con la clave real de producción -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -245,6 +247,13 @@
 
     <!-- ── Submit ────────────────────────────────────────────────── -->
     <div class="submit-area hidden" id="submitArea">
+      <!-- Verificación Turnstile — reemplazar 1x00000000000000000000AA con la sitekey real -->
+      <div class="turnstile-wrap">
+        <div class="cf-turnstile"
+             data-sitekey="0x4AAAAAADR3J6BHUJT4fpHQ"
+             data-theme="dark"
+             data-language="es"></div>
+      </div>
       <button type="submit" id="btnSubmit">Enviar Formulario</button>
       <div id="resultMsg" class="hidden" role="alert"></div>
     </div>

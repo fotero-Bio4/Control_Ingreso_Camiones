@@ -21,6 +21,23 @@
 </header>
 
 <main>
+
+  <!-- Banner de bienvenida -->
+  <div class="welcome-banner">
+    Bienvenido al centro de carga de documentación de transportistas
+  </div>
+
+  <!-- Pantalla de confirmación post-envío -->
+  <div id="confirmacionArea" class="hidden">
+    <div class="confirmacion-icono">✅</div>
+    <h2 class="confirmacion-titulo">¡Muchas gracias por actualizar tus datos!</h2>
+    <p class="confirmacion-texto">
+      Tu documentación fue enviada correctamente. El equipo de BIO4 la revisará a la brevedad.<br>
+      Podés cerrar esta ventana o regresar para realizar otro envío.
+    </p>
+    <button id="btnRegresar" class="btn-regresar">← Regresar al inicio</button>
+  </div>
+
   <form id="mainForm" novalidate>
 
     <!-- ── Paso 1: modo ──────────────────────────────────────────── -->

@@ -419,6 +419,61 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin-bottom: 16px;
 }
 
+/* ── Bienvenida ────────────────────────────────────────────────────────── */
+.welcome-banner {
+  max-width: 680px;
+  margin: 24px auto 0;
+  padding: 14px 20px;
+  background: var(--green-bg);
+  border: 1px solid var(--green-border);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-sub);
+}
+
+/* ── Confirmación de envío ─────────────────────────────────────────────── */
+#confirmacionArea {
+  max-width: 680px;
+  margin: 40px auto;
+  padding: 0 12px;
+}
+.confirmacion-card {
+  background: var(--card);
+  border: 1px solid var(--green-border);
+  border-radius: 14px;
+  padding: 48px 32px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(90,170,24,0.10);
+}
+.confirmacion-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+.confirmacion-card h2 {
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+.confirmacion-card p {
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+.btn-regresar {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--brand);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-regresar:hover { background: var(--brand-hl); }
+
 /* ── Responsive ────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .modo-grid   { grid-template-columns: 1fr; }

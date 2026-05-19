@@ -200,8 +200,8 @@ document.getElementById('mainForm').addEventListener('submit', async function (e
     catch { data = { error: `Error HTTP ${resp.status}` }; }
 
     if (resp.ok && data.ok) {
-      showResult('ok', `✓ ${data.message}`);
       resetForm();
+      mostrarConfirmacion();
     } else {
       showResult('error', `✗ ${data.error || 'Error desconocido al procesar el formulario.'}`);
     }
@@ -274,6 +274,23 @@ function resetForm() {
   document.querySelectorAll('[data-alta]').forEach(el => { el.required = false; });
   document.querySelectorAll('.req-alta').forEach(el => { el.style.display = 'none'; });
 }
+
+function mostrarConfirmacion() {
+  document.getElementById('mainForm').classList.add('hidden');
+  document.querySelector('.welcome-banner').classList.add('hidden');
+  const conf = document.getElementById('confirmacionArea');
+  conf.classList.remove('hidden');
+  conf.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+document.addEventListener('click', function (e) {
+  if (e.target.id === 'btnRegresar') {
+    document.getElementById('confirmacionArea').classList.add('hidden');
+    document.getElementById('mainForm').classList.remove('hidden');
+    document.querySelector('.welcome-banner').classList.remove('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+});
 
 function showResult(type, msg) {
   const el = document.getElementById('resultMsg');
